@@ -1,8 +1,19 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
 import subprocess
 from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtQml import QQmlApplicationEngine
-out = subprocess.check_output(['python',
-                               "C:/Users/GODWIN/Documents/Ninja Preview/qml_preview.py"])
+os.chdir("C:/Users/GODWIN/Documents/GitHub/Ninja-Preview/App/qml_preview/qml_preview")
+"""out = subprocess.check_output(['qml_preview',
+                               "C:/Users/GODWIN/Documents/GitHub/Ninja-Preview/main.qml",
+                               "-style",
+                               "material"])"""
+stat = ['qml_preview', 
+        "C:/Users/GODWIN/Documents/GitHub/Ninja-Preview/UI/main.qml"]
+if len(sys.argv) > 2:
+    stat.extend(sys.argv[1:])
+print(stat)
+out = subprocess.check_output(stat, shell=True)
+print(out)
 

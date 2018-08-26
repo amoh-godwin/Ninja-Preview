@@ -7,6 +7,10 @@ ApplicationWindow {
     height: 600
     visible: true
 
+    Component.onCompleted: {
+            console.log('love of God')
+            }
+
     Pane {
         anchors.centerIn: parent
         width: 200

@@ -2,14 +2,13 @@
 import sys
 import os
 import subprocess
-from PyQt5.QtGui import QGuiApplication
-from PyQt5.QtQml import QQmlApplicationEngine
-os.chdir("C:/Users/GODWIN/Documents/GitHub/Ninja-Preview/App/qml_preview/qml_preview")
+cwd = os.getcwd()
+os.chdir(os.path.join(cwd, "App/qmlview/qmlview"))
 """out = subprocess.check_output(['qml_preview',
                                "C:/Users/GODWIN/Documents/GitHub/Ninja-Preview/main.qml",
                                "-style",
                                "material"])"""
-stat = ['qml_preview', 
+stat = ['qmlview',
         "C:/Users/GODWIN/Documents/GitHub/Ninja-Preview/UI/main.qml"]
 if len(sys.argv) > 2:
     stat.extend(sys.argv[1:])

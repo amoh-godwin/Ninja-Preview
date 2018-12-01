@@ -25,6 +25,9 @@ ToolBar {
         NavButton {
             anchors.bottom: parent.bottom
             text: "Quit"
+
+            onClicked: mainWindow.close()
+
         }
 
     }

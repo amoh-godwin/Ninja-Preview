@@ -6,11 +6,11 @@ import "others"
 import "Components"
 
 ApplicationWindow {
+    id: mainWindow
     width: 392
     height: 620
     visible: true
 
-    property var fileUrls: []
     signal addfiles(string ctnt)
 
     onAddfiles: {

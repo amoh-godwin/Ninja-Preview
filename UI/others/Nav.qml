@@ -18,6 +18,8 @@ ToolBar {
             anchors.top: parent.top
             text: "+"
 
+            onClicked: picker.open()
+
         }
 
         NavButton {

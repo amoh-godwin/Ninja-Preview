@@ -6,11 +6,23 @@ ToolBar {
     width: parent.width
     height: parent.height
 
+    background: Rectangle {
+        color: "#191b1f"
+    }
+
     ColumnLayout {
         width: parent.width
+        height: parent.height
 
-        ToolButton {
-            //
+        NavButton {
+            anchors.top: parent.top
+            text: "+"
+
+        }
+
+        NavButton {
+            anchors.bottom: parent.bottom
+            text: "Quit"
         }
 
     }

@@ -28,11 +28,15 @@ ApplicationWindow {
                 color: "white"
 
                 ListView {
+                    id: view
                     width: parent.width
                     height: parent.height
                     model: QmlFilesModel {}
                     delegate: QmlFilesDelegate {}
                     focus: true
+
+                    ScrollBar.vertical: ScrollBar {}
+
                 }
 
             }

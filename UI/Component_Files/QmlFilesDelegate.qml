@@ -6,6 +6,7 @@ Component {
     Rectangle {
         width: parent.width
         height: 48
+        color: index % 2 > 0 ? "white" : "#f1f1f1"
 
         RowLayout {
             width: parent.width

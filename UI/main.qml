@@ -11,6 +11,21 @@ ApplicationWindow {
     visible: true
 
     property var fileUrls: []
+    signal addfiles(string ctnt)
+
+    onAddfiles: {
+
+        var filelist = ctnt.split(',')
+        var len = filelist.length
+
+        while (len > 0) {
+            var url = filelist[len - 1]
+            var name = url.substring(8, url.length)
+            view.model.append({"url": url, "name": name})
+            len--
+        }
+
+    }
 
 
     Rectangle {
@@ -61,14 +76,7 @@ ApplicationWindow {
         nameFilters: ['Qml File (*.qml)']
 
         onAccepted: {
-
-            for (var x=0; x<picker.fileUrls.length; x++) {
-                fileUrls.push(picker.fileUrls[x])
-                console.log(picker.fileUrls[x])
-            }
-
-            console.log(fileUrls)
-            console.log(picker.fileUrls.length)
+            addfiles(picker.fileUrls.toString())
         }
 
     }

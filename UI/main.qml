@@ -73,7 +73,7 @@ ApplicationWindow {
         selectExisting: true
         selectMultiple: true
 
-        nameFilters: ['Qml File (*.qml)']
+        nameFilters: ['Qml Files (*.qml)']
 
         onAccepted: {
             addfiles(picker.fileUrls.toString())

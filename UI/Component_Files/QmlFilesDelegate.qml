@@ -9,7 +9,7 @@ Component {
         color: index % 2 > 0 ? "white" : "#f1f1f1"
 
         RowLayout {
-            width: parent.width
+            width: parent.width - 8
             height: 40
             anchors.verticalCenter: parent.verticalCenter
             spacing: 0
@@ -28,14 +28,14 @@ Component {
             Button {
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.preferredWidth: 36
-                Layout.preferredHeight: 36
+                Layout.preferredHeight: 28
                 text: ">"
             }
 
             Button {
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.preferredWidth: 36
-                Layout.preferredHeight: 36
+                Layout.preferredHeight: 28
                 text: "x"
             }
 

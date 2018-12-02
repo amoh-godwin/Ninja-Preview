@@ -11,6 +11,8 @@ ApplicationWindow {
     height: 620
     visible: true
 
+    flags: Qt.Window | Qt.FramelessWindowHint
+
     signal addfiles(string ctnt)
 
     onAddfiles: {

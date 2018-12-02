@@ -14,6 +14,8 @@ ApplicationWindow {
     flags: Qt.Window | Qt.FramelessWindowHint
 
     signal addfiles(string ctnt)
+    signal removeFromView(int index)
+    signal runFile(string filename)
 
     onAddfiles: {
 
@@ -27,6 +29,14 @@ ApplicationWindow {
             len--
         }
 
+    }
+
+    onRemoveFromView: {
+        //
+    }
+
+    onRunFile: {
+        //
     }
 
 

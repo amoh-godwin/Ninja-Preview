@@ -23,6 +23,13 @@ ToolBar {
         }
 
         NavButton {
+            text: "-"
+
+            onClicked: mainWindow.showMinimized()
+
+        }
+
+        NavButton {
             anchors.bottom: parent.bottom
             text: "Quit"
 

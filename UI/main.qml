@@ -32,7 +32,7 @@ ApplicationWindow {
     }
 
     onRemoveFromView: {
-        //
+        view.model.remove(index)
     }
 
     onRunFile: {

@@ -29,10 +29,16 @@ Component {
 
             CustomButton {
                 text: "\uE768"
+
+                onClicked: runFile(url)
+
             }
 
             CustomButton {
                 text: "\uE738"
+
+                onClicked: removeFromView(index)
+
             }
 
         }

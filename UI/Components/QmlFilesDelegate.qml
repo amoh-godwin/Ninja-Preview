@@ -30,7 +30,7 @@ Component {
             CustomButton {
                 text: "\uE768"
 
-                onClicked: runFile(url)
+                onClicked: runFile(name)
 
             }
 

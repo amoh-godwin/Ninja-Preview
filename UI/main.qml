@@ -39,7 +39,8 @@ ApplicationWindow {
     }
 
     onRunFile: {
-        //
+        // call the python code to run the filename
+        preview.run(filename)
     }
 
 
@@ -147,6 +148,10 @@ ApplicationWindow {
             addfiles(picker.fileUrls.toString())
         }
 
+    }
+
+    Connections {
+        target: preview
     }
 
 }

@@ -13,6 +13,9 @@ ApplicationWindow {
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
+    property int prevX
+    property int prevY
+
     signal addfiles(string ctnt)
     signal removeFromView(int index)
     signal runFile(string filename)
@@ -39,6 +42,58 @@ ApplicationWindow {
         //
     }
 
+
+    header: Rectangle {
+        width: parent.width
+        height: 36
+        color: "#191b1f"
+
+        RowLayout {
+            height: parent.height
+
+            Image {
+                anchors.left: parent.left
+                anchors.leftMargin: 15
+                anchors.verticalCenter: parent.verticalCenter
+                sourceSize.width: 18
+                sourceSize.height: 18
+                source: "icons/ic_airplay_white_18dp.png"
+            }
+
+            Text {
+                anchors.left: parent.children[0].right
+                anchors.leftMargin: 15
+                font {
+                    family: "Segoe UI Semilight"
+                    pixelSize: 14
+                }
+
+                text: "Ninja-Preview"
+                color: "white"
+            }
+
+        }
+
+        MouseArea {
+            anchors.fill: parent
+
+            onPressed: {
+                prevX = mouseX
+                prevY = mouseY
+            }
+
+            onMouseXChanged: {
+                var dx = mouseX - prevX
+                mainWindow.setX(mainWindow.x + dx)
+            }
+
+            onMouseYChanged: {
+                var dy = mouseY - prevY
+                mainWindow.setY(mainWindow.y + dy)
+            }
+
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -77,6 +132,7 @@ ApplicationWindow {
             }
 
         }
+
 
     }
 

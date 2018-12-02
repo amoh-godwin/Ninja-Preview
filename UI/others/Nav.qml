@@ -16,7 +16,7 @@ ToolBar {
 
         NavButton {
             anchors.top: parent.top
-            text: "+"
+            text: "\uE710"
 
             onClicked: picker.open()
 

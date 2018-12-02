@@ -29,14 +29,30 @@ Component {
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.preferredWidth: 36
                 Layout.preferredHeight: 28
-                text: ">"
+                font.family: "Segoe MDL2 Assets"
+                text: "\uE768"
+
+                background: Rectangle {
+                    implicitWidth: 36
+                    implicitHeight: 28
+                    color: parent.hovered ? "#f1f1f1" : "transparent"
+                }
+
+                contentItem: Text {
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    text: parent.text
+                    font: parent.font
+                    color: "green"
+                }
+
             }
 
             Button {
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.preferredWidth: 36
                 Layout.preferredHeight: 28
-                text: "x"
+                text: "\uE711"
             }
 
         }

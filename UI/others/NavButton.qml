@@ -14,6 +14,7 @@ ToolButton {
     contentItem: Text {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Segoe MDL2 Assets"
         text: ctrl.text
         color: "white"
     }

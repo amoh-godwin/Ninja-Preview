@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 
 Component {
     Rectangle {
+        id: delebase
         width: parent.width
         height: 48
         color: index % 2 > 0 ? "white" : "#f1f1f1"
@@ -35,7 +36,7 @@ Component {
                 background: Rectangle {
                     implicitWidth: 36
                     implicitHeight: 28
-                    color: parent.hovered ? "#f1f1f1" : "transparent"
+                    color: parent.pressed ? "#c1c1c1" : parent.hovered ? "#e1e1e1" : "transparent"
                 }
 
                 contentItem: Text {

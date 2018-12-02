@@ -32,7 +32,7 @@ Component {
             }
 
             CustomButton {
-                text: "\uE711"
+                text: "\uE738"
             }
 
         }

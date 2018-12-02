@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import "../others"
 
 Component {
     Rectangle {
@@ -26,33 +27,11 @@ Component {
                 }
             }
 
-            Button {
-                anchors.verticalCenter: parent.verticalCenter
-                Layout.preferredWidth: 36
-                Layout.preferredHeight: 28
-                font.family: "Segoe MDL2 Assets"
+            CustomButton {
                 text: "\uE768"
-
-                background: Rectangle {
-                    implicitWidth: 36
-                    implicitHeight: 28
-                    color: parent.pressed ? "#c1c1c1" : parent.hovered ? "#e1e1e1" : "transparent"
-                }
-
-                contentItem: Text {
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    text: parent.text
-                    font: parent.font
-                    color: "green"
-                }
-
             }
 
-            Button {
-                anchors.verticalCenter: parent.verticalCenter
-                Layout.preferredWidth: 36
-                Layout.preferredHeight: 28
+            CustomButton {
                 text: "\uE711"
             }
 

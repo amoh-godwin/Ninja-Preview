@@ -53,17 +53,15 @@ ApplicationWindow {
             height: parent.height
 
             Image {
-                anchors.left: parent.left
-                anchors.leftMargin: 15
-                anchors.verticalCenter: parent.verticalCenter
+                Layout.leftMargin: 15
+                Layout.alignment: Layout.Center
                 sourceSize.width: 18
                 sourceSize.height: 18
                 source: "icons/ic_airplay_white_18dp.png"
             }
 
             Text {
-                anchors.left: parent.children[0].right
-                anchors.leftMargin: 15
+                Layout.leftMargin: 15
                 font {
                     family: "Segoe UI Semilight"
                     pixelSize: 14

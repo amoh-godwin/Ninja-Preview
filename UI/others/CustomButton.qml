@@ -3,7 +3,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 Button {
-    anchors.verticalCenter: parent.verticalCenter
+    Layout.alignment: Layout.Center
     Layout.preferredWidth: 36
     Layout.preferredHeight: 28
     font.family: "Segoe MDL2 Assets"

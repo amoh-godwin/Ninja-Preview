@@ -5,9 +5,13 @@ from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from preview import Preview
 
-def postprocess():
-    # kill threads
-    pass
+
+def cleanUp():
+    print(preview.app_closed)
+    preview.app_closed = True
+    print('\n', preview.app_closed)
+    return
+
 
 qApp = QGuiApplication(sys.argv)
 
@@ -26,10 +30,7 @@ os.chdir(os.path.join(cwd, "App/qmlview/qmlview"))
 
 engine.quit.connect(qApp.quit)
 
-qApp.aboutToQuit.connect(postprocess)
+qApp.aboutToQuit.connect(cleanUp)
 qApp.exec_()
 
 sys.exit()
-
-
-

@@ -12,10 +12,12 @@ ToolBar {
 
     ColumnLayout {
         width: parent.width
-        height: parent.height
+        //height: parent.height
+        spacing: 0
 
         NavButton {
-            anchors.top: parent.top
+            Layout.alignment: Layout.Top
+            Layout.topMargin: 0
             text: "\uE710"
 
             onClicked: picker.open()
@@ -23,7 +25,7 @@ ToolBar {
         }
 
         NavButton {
-            anchors.bottom: parent.children[2].top
+            Layout.alignment: Layout.Bottom
             text: "\uE738"
 
             onClicked: mainWindow.showMinimized()
@@ -31,7 +33,7 @@ ToolBar {
         }
 
         NavButton {
-            anchors.bottom: parent.bottom
+            Layout.alignment: Layout.Bottom
             text: "Quit"
 
             onClicked: mainWindow.close()

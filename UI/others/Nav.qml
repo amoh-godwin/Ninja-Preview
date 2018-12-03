@@ -23,6 +23,14 @@ ToolBar {
         }
 
         NavButton {
+            anchors.bottom: parent.children[2].top
+            text: "\uE738"
+
+            onClicked: mainWindow.showMinimized()
+
+        }
+
+        NavButton {
             anchors.bottom: parent.bottom
             text: "Quit"
 

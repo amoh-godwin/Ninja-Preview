@@ -1,9 +1,11 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import "../others"
 
 Component {
     Rectangle {
+        id: delebase
         width: parent.width
         height: 48
         color: index % 2 > 0 ? "white" : "#f1f1f1"
@@ -25,34 +27,18 @@ Component {
                 }
             }
 
-            Button {
-                anchors.verticalCenter: parent.verticalCenter
-                Layout.preferredWidth: 36
-                Layout.preferredHeight: 28
-                font.family: "Segoe MDL2 Assets"
+            CustomButton {
                 text: "\uE768"
 
-                background: Rectangle {
-                    implicitWidth: 36
-                    implicitHeight: 28
-                    color: parent.hovered ? "#f1f1f1" : "transparent"
-                }
-
-                contentItem: Text {
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    text: parent.text
-                    font: parent.font
-                    color: "green"
-                }
+                onClicked: runFile(name)
 
             }
 
-            Button {
-                anchors.verticalCenter: parent.verticalCenter
-                Layout.preferredWidth: 36
-                Layout.preferredHeight: 28
-                text: "\uE711"
+            CustomButton {
+                text: "\uE738"
+
+                onClicked: removeFromView(index)
+
             }
 
         }

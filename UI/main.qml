@@ -11,7 +11,7 @@ ApplicationWindow {
     width: 800
     height: 600
     visible: true
-    title: "Empty"
+    title: "Nothing Running"
     color: "transparent"
 
     flags: Qt.Window | Qt.FramelessWindowHint

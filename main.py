@@ -12,7 +12,7 @@ def cleanUp():
 
 qApp = QGuiApplication(sys.argv)
 
-qApp.setWindowIcon(QIcon("./UI/icons/logo.ico"))
+qApp.setWindowIcon(QIcon("./UI/icons/ic_airplay_white_18dp.png"))
 
 engine = QQmlApplicationEngine()
 

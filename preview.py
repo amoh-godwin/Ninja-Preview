@@ -16,7 +16,7 @@ class Preview(QObject):
         self.break_check = False
         self.output = b''
 
-    log = pyqtSignal(str, arguments=['_run'])
+    log = pyqtSignal(str, arguments=['_monitor'])
 
     @pyqtSlot(str)
     def run(self, filename):
@@ -88,7 +88,7 @@ class Preview(QObject):
                     self.break_check = True
 
                 print('output: ', str(self.output))
-                # self.log.emit(str(self.output))
+                self.log.emit(str(self.output, 'utf-8'))
 
                 # Get a clean slate and
                 # wait 0.3 seconds then repeat

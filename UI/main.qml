@@ -207,7 +207,8 @@ ApplicationWindow {
         target: preview
 
         onLog: {
-            //
+            var content = _monitor
+            console.log(content)
         }
 
     }

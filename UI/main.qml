@@ -116,18 +116,42 @@ ApplicationWindow {
                 Layout.fillHeight: true
                 color: "white"
 
-                ListView {
-                    id: view
+                ColumnLayout {
                     width: parent.width
                     height: parent.height
-                    model: QmlFilesModel {}
-                    delegate: QmlFilesDelegate {}
-                    focus: true
+                    spacing: 0
 
-                    ScrollBar.vertical: ScrollBar {}
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        ListView {
+                            id: view
+                            width: parent.width
+                            height: parent.height
+                            model: QmlFilesModel {}
+                            delegate: QmlFilesDelegate {}
+                            focus: true
+
+                            ScrollBar.vertical: ScrollBar {}
+
+                        }
+
+                    }
+
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 12
+                        color: "transparent"
+                    }
+
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        color: "white"
+                    }
 
                 }
-
             }
 
         }

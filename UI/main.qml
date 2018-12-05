@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.3
+import QtGraphicalEffects 1.0
 import "others"
 import "Components"
 
@@ -11,6 +12,7 @@ ApplicationWindow {
     height: 600
     visible: true
     title: "Empty"
+    color: "transparent"
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
@@ -48,69 +50,109 @@ ApplicationWindow {
         preview.run(filename, current_index)
     }
 
-
     header: Rectangle {
-        width: parent.width
+        anchors.left: parent.left
+        anchors.leftMargin: 6
+        width: bg.width
         height: 36
-        color: "#191b1f"
+        color: "transparent"
 
-        RowLayout {
-            height: parent.height
+        Rectangle {
+            anchors.top: parent.top
+            anchors.topMargin: 6
+            width: parent.width
+            height: parent.height - 6
+            color: "#191b1f"
 
-            Image {
-                Layout.leftMargin: 15
-                Layout.alignment: Layout.Center
-                sourceSize.width: 18
-                sourceSize.height: 18
-                source: "icons/ic_airplay_white_18dp.png"
-            }
+            RowLayout {
+                height: parent.height
 
-            Text {
-                Layout.leftMargin: 15
-                width: 200
-                font {
-                    family: "Segoe UI Semilight"
-                    pixelSize: 12
+                Image {
+                    Layout.leftMargin: 15
+                    Layout.alignment: Layout.Center
+                    sourceSize.width: 18
+                    sourceSize.height: 18
+                    source: "icons/ic_airplay_white_18dp.png"
                 }
-                elide: Text.ElideMiddle
-                text: title + "  - "
-                color: "white"
-            }
 
-            Text {
-                font {
-                    family: "Segoe UI Semilight"
-                    pixelSize: 12
+                Text {
+                    Layout.leftMargin: 15
+                    width: 200
+                    font {
+                        family: "Segoe UI Semilight"
+                        pixelSize: 12
+                    }
+                    elide: Text.ElideMiddle
+                    text: title + "  - "
+                    color: "white"
                 }
-                text: "Ninja-Preview (64-bit)"
-                color: "white"
+
+                Text {
+                    font {
+                        family: "Segoe UI Semilight"
+                        pixelSize: 12
+                    }
+                    text: "Ninja-Preview (64-bit)"
+                    color: "white"
+                }
+
             }
 
-        }
+            MouseArea {
+                anchors.fill: parent
 
-        MouseArea {
-            anchors.fill: parent
+                onPressed: {
+                    prevX = mouseX
+                    prevY = mouseY
+                }
 
-            onPressed: {
-                prevX = mouseX
-                prevY = mouseY
-            }
+                onMouseXChanged: {
+                    var dx = mouseX - prevX
+                    mainWindow.setX(mainWindow.x + dx)
+                }
 
-            onMouseXChanged: {
-                var dx = mouseX - prevX
-                mainWindow.setX(mainWindow.x + dx)
-            }
+                onMouseYChanged: {
+                    var dy = mouseY - prevY
+                    mainWindow.setY(mainWindow.y + dy)
+                }
 
-            onMouseYChanged: {
-                var dy = mouseY - prevY
-                mainWindow.setY(mainWindow.y + dy)
             }
 
         }
     }
 
+    background: Rectangle {
+        id: bg
+        anchors.centerIn: parent
+        width: mainWindow.width - 12
+        height: mainWindow.height - 12
+        color: "gold"
+
+        layer.enabled: true
+        layer.effect: DropShadow {
+            anchors.fill: bg
+            verticalOffset: 0
+            horizontalOffset: 0
+            radius: 12
+            samples: 25
+            color: "#80000000"
+            source: bg
+        }
+
+    }
+
     Rectangle {
-        anchors.fill: parent
+        id: adom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 6
+        anchors.rightMargin: 6
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 6
+        anchors.top: parent.top
+        width: bg.width
+        height: bg.height
+        clip: true
 
         RowLayout {
             width: parent.width
@@ -188,7 +230,6 @@ ApplicationWindow {
             }
 
         }
-
 
     }
 

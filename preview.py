@@ -25,7 +25,8 @@ class Preview(QObject):
     def run(self, filename, view_index):
         # Start a thread to handle process
         run_thread = threading.Thread(target=self._run, args=[filename,
-                                                              view_index])
+                                                              view_index],
+                                      daemon=True)
         run_thread.start()
         return
 
@@ -82,7 +83,8 @@ class Preview(QObject):
                     self.err_chk_on = True
                     err_chk_thread = threading.Thread(
                                             target=self._error_checking,
-                                            args=[obj])
+                                            args=[obj],
+                                            daemon=True)
                     err_chk_thread.start()
                     # continue
 

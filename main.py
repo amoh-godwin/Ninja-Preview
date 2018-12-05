@@ -6,9 +6,7 @@ from preview import Preview
 
 
 def cleanUp():
-    print(preview.app_closed)
     preview.app_closed = True
-    print('\n', preview.app_closed)
     return
 
 

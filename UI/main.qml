@@ -140,9 +140,10 @@ ApplicationWindow {
                     }
 
                     Rectangle {
+                        id: aligner
                         Layout.fillWidth: true
                         Layout.preferredHeight: 12
-                        color: "transparent"
+                        color: "#121316"
                     }
 
                     Rectangle {

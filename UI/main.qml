@@ -16,6 +16,7 @@ ApplicationWindow {
 
     property int prevX
     property int prevY
+    property int current_index
 
     signal addfiles(string ctnt)
     signal removeFromView(int index)
@@ -42,7 +43,8 @@ ApplicationWindow {
     onRunFile: {
         // call the python code to run the filename
         title = filename
-        infoView.model.append({'content': ""})
+        infoView.model.append({"content":""})
+        current_index = infoView.model.count - 1
         preview.run(filename)
     }
 
@@ -207,8 +209,15 @@ ApplicationWindow {
         target: preview
 
         onLog: {
-            var content = _monitor
-            console.log(content)
+            var content
+            var ret_val = _monitor
+            var prevCont = infoView.model.get(current_index).content
+            if (prevCont === ''){
+                content = ret_val
+            } else {
+                content = prevCont + '<br/>' + ret_val
+            }
+            infoView.model.setProperty(current_index, 'content', content)
         }
 
     }

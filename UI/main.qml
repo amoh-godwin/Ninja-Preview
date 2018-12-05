@@ -205,6 +205,11 @@ ApplicationWindow {
 
     Connections {
         target: preview
+
+        onLog: {
+            //
+        }
+
     }
 
 }

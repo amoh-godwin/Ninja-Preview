@@ -10,6 +10,7 @@ ApplicationWindow {
     width: 800
     height: 600
     visible: true
+    title: "C:/path/to/qmlfile.qml"
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
@@ -62,12 +63,22 @@ ApplicationWindow {
 
             Text {
                 Layout.leftMargin: 15
+                width: 200
                 font {
                     family: "Segoe UI Semilight"
-                    pixelSize: 14
+                    pixelSize: 12
                 }
+                elide: Text.ElideMiddle
+                text: title
+                color: "white"
+            }
 
-                text: "Ninja-Preview"
+            Text {
+                font {
+                    family: "Segoe UI Semilight"
+                    pixelSize: 12
+                }
+                text: " -  Ninja-Preview (64-bit)"
                 color: "white"
             }
 
@@ -150,6 +161,21 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         color: "white"
+
+                        ListView {
+                            width: parent.width
+                            height: parent.height
+                            spacing: 8
+                            model: 8
+                            delegate: InfoDelegate {}
+                            focus: true
+                            clip: true
+
+                            ScrollBar.vertical: ScrollBar {}
+                            ScrollBar.horizontal: ScrollBar {}
+
+                        }
+
                     }
 
                 }

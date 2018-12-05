@@ -45,7 +45,7 @@ ApplicationWindow {
         title = filename
         infoView.model.append({"content":""})
         current_index = infoView.model.count - 1
-        preview.run(filename)
+        preview.run(filename, current_index)
     }
 
 
@@ -211,13 +211,21 @@ ApplicationWindow {
         onLog: {
             var content
             var ret_val = _monitor
-            var prevCont = infoView.model.get(current_index).content
+
+            var splits = ret_val.split(':::')
+            var rel_ind = Number.parseFloat(splits[0])
+            var main_data = splits[1]
+
+            var prevCont = infoView.model.get(rel_ind).content
+
             if (prevCont === ''){
-                content = ret_val
+                content = main_data
             } else {
-                content = prevCont + '<br/>' + ret_val
+                content = prevCont + '<br/>' + main_data
             }
-            infoView.model.setProperty(current_index, 'content', content)
+
+            console.log(rel_ind)
+            infoView.model.setProperty(rel_ind, 'content', content)
         }
 
     }

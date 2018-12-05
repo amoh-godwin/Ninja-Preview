@@ -18,25 +18,28 @@ class Preview(QObject):
 
     log = pyqtSignal(str, arguments=['_monitor'])
 
-    @pyqtSlot(str)
-    def run(self, filename):
+    @pyqtSlot(str, int)
+    def run(self, filename, view_index):
         # Start a thread to handle process
-        run_thread = threading.Thread(target=self._run, args=[filename])
+        run_thread = threading.Thread(target=self._run, args=[filename,
+                                                              view_index])
         run_thread.start()
+        return
 
-    def _run(self, filename):
-        print('right here')
+    def _run(self, filename, view_index):
+        print('right here', view_index)
         self.process_running = True
         subP = subprocess.Popen(['qmlview',
                                 filename, ],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT,
                                 shell=True)
-        monitor_thread = threading.Thread(target=self._monitor, args=[subP],
+        monitor_thread = threading.Thread(target=self._monitor,
+                                          args=[subP, view_index],
                                           daemon=True)
         monitor_thread.start()
 
-    def _monitor(self, obj):
+    def _monitor(self, obj, view_index):
         # monitor a change in the output variable
         while (self.process_running and not self.app_closed):
             # check if error checking is on
@@ -88,7 +91,8 @@ class Preview(QObject):
                     self.break_check = True
 
                 print('output: ', str(self.output))
-                self.log.emit(str(self.output, 'utf-8'))
+                self.log.emit(str(view_index) + ":::" + str(self.output,
+                                                            'utf-8'))
 
                 # Get a clean slate and
                 # wait 0.3 seconds then repeat

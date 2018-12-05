@@ -14,6 +14,7 @@ class Preview(QObject):
         self.app_closed = False
         self.err_chk_on = False
         self.break_check = False
+        self.err_chk_called = False
         self.output = b''
 
     log = pyqtSignal(str, arguments=['_monitor'])
@@ -115,11 +116,21 @@ class Preview(QObject):
 
         # we are out of loop
         print('process has exited')
+
+        # calculate exit code
+        if self.err_chk_called:
+            exit_code = '1x0000'
+        else:
+            exit_code = '0'
+        print(exit_code)
+        self.err_chk_called = False
         self.log.emit(str(view_index) + ":::" + "process has exited")
+        self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
 
     def _error_checking(self, obj):
 
         # wait before start
+        self.err_chk_called = True
         count = 0
         while (self.process_running and not self.app_closed and not
                self.break_check):
@@ -128,7 +139,7 @@ class Preview(QObject):
                 # kill the POpen process
                 obj.kill()
                 # try to delete it
-                obj = None
+                # obj = None
                 # stop the process
                 self.process_running = False
                 break

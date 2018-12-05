@@ -49,7 +49,7 @@ class Preview(QObject):
                     # wait seven seconds since it takes at least
                     # five for the error checking to be done
                     # and repeat the loop to verify what happened
-                    sleep(7)
+                    sleep(3)
                     continue
 
             # read one char from stdout
@@ -124,7 +124,7 @@ class Preview(QObject):
         while (self.process_running and not self.app_closed and not
                self.break_check):
 
-            if count > 5:
+            if count > 2:
                 # kill the POpen process
                 obj.kill()
                 # try to delete it

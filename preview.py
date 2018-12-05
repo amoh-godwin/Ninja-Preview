@@ -115,6 +115,7 @@ class Preview(QObject):
 
         # we are out of loop
         print('process has exited')
+        self.log.emit(str(view_index) + ":::" + "process has exited")
 
     def _error_checking(self, obj):
 

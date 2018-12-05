@@ -17,7 +17,9 @@ qApp = QGuiApplication(sys.argv)
 qApp.setWindowIcon(QIcon("/UI/icons/logo.ico"))
 
 engine = QQmlApplicationEngine()
+
 preview = Preview()
+
 engine.rootContext().setContextProperty('preview', preview)
 
 engine.load('UI/main.qml')
@@ -25,6 +27,5 @@ engine.load('UI/main.qml')
 engine.quit.connect(qApp.quit)
 
 qApp.aboutToQuit.connect(cleanUp)
-qApp.exec_()
 
-sys.exit()
+sys.exit(qApp.exec_())

@@ -92,7 +92,7 @@ ApplicationWindow {
                         family: "Segoe UI Semilight"
                         pixelSize: 12
                     }
-                    text: "Ninja-Preview (64-bit)"
+                    text: "Ninja-Preview  (64-bit)"
                     color: "white"
                 }
 

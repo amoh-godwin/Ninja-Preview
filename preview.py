@@ -6,6 +6,8 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
 class Preview(QObject):
     """
+        The function that really does the calling of qmlview
+        and reading its return codes
     """
 
     def __init__(self):
@@ -28,7 +30,6 @@ class Preview(QObject):
         return
 
     def _run(self, filename, view_index):
-        print('right here', view_index)
         self.process_running = True
         subP = subprocess.Popen(['qmlview',
                                 filename, ],
@@ -91,7 +92,7 @@ class Preview(QObject):
                 elif self.output != b'\n' and self.err_chk_on:
                     self.break_check = True
 
-                print('output: ', str(self.output))
+                # send output to UI layer
                 self.log.emit(str(view_index) + ":::" + str(self.output,
                                                             'utf-8'))
 
@@ -108,24 +109,27 @@ class Preview(QObject):
                 if obj.returncode is None:
                     break
                 else:
-                    print(obj.returncode)
+                    # do nothing
+                    pass
             # it is just a normal character add and lets continue
             # this is one of the two required
             else:
                 self.output += char
 
         # we are out of loop
-        print('process has exited')
-
         # calculate exit code
         if self.err_chk_called:
             exit_code = '1x0000'
         else:
             exit_code = '0'
-        print(exit_code)
+
+        # reset the variable
         self.err_chk_called = False
+
+        # emit the exit codes
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
+        return
 
     def _error_checking(self, obj):
 
@@ -151,13 +155,9 @@ class Preview(QObject):
                 sleep(1)
 
             else:
-                print(self.output, ': not an error')
+                # not an error
                 break
 
+        # Reset the variables
         self.err_chk_on = False
         self.break_check = False
-
-    def end_read(self):
-        print('has called end_read')
-        sleep(0.3)
-        self.process_running = False

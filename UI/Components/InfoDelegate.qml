@@ -18,7 +18,7 @@ Component {
                 textFormat: Text.RichText
                 font.family: "Segoe UI Semilight"
                 font.pixelSize: 14
-                text: "[ " + index +" ] :    " + "love one and d aosdfl dsaofjsd aoidfaks dsfjaidskf adfsdfjsdfafdfdf=adfs fskdsiaf sdfaisfkjasfidskfjakdfiadfkjafdl;fs fsdafjasdfksfa djfa;fai sifa;  sijfaskfjsf sdfiaffasjf sa sdkfasfisdfisdfjdsfjds f dsisdfjdfklove one and d aosdfl dsaofjsd aoidfaks dsfjaidskf adfsdfjsdfafdfdf=adfs fskdsiaf sdfaisfkjasfidskfjakdfiadfkjafdl;fs fsdafjasdfksfa djfa;fai sifa;  sijfaskfjsf sdfiaffasjf sa sdkfas"
+                text: "[ " + index +" ] :    " + content
             }
 
         }

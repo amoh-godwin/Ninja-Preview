@@ -42,6 +42,7 @@ ApplicationWindow {
     onRunFile: {
         // call the python code to run the filename
         title = filename
+        infoView.model.append({'content': ""})
         preview.run(filename)
     }
 
@@ -165,10 +166,11 @@ ApplicationWindow {
                         color: "white"
 
                         ListView {
+                            id: infoView
                             width: parent.width
                             height: parent.height
                             spacing: 8
-                            model: 8
+                            model: InfoModel {}
                             delegate: InfoDelegate {}
                             focus: true
                             clip: true

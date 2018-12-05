@@ -54,7 +54,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.leftMargin: 6
         width: bg.width
-        height: 36
+        height: 42
         color: "transparent"
 
         Rectangle {

@@ -10,7 +10,7 @@ ApplicationWindow {
     width: 800
     height: 600
     visible: true
-    title: "C:/path/to/qmlfile.qml"
+    title: "Empty"
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
@@ -41,6 +41,7 @@ ApplicationWindow {
 
     onRunFile: {
         // call the python code to run the filename
+        title = filename
         preview.run(filename)
     }
 
@@ -69,7 +70,7 @@ ApplicationWindow {
                     pixelSize: 12
                 }
                 elide: Text.ElideMiddle
-                text: title
+                text: title + "  - "
                 color: "white"
             }
 
@@ -78,7 +79,7 @@ ApplicationWindow {
                     family: "Segoe UI Semilight"
                     pixelSize: 12
                 }
-                text: " -  Ninja-Preview (64-bit)"
+                text: "Ninja-Preview (64-bit)"
                 color: "white"
             }
 
@@ -158,6 +159,7 @@ ApplicationWindow {
                     }
 
                     Rectangle {
+                        id: infoPane
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         color: "white"

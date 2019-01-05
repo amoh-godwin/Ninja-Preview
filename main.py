@@ -24,6 +24,8 @@ engine.rootContext().setContextProperty('preview', preview)
 
 engine.load('UI/main.qml')
 
+cwd = os.getcwd()
+os.chdir(os.path.join(cwd, "App/qmlview/qmlview"))
 engine.quit.connect(qApp.quit)
 
 qApp.aboutToQuit.connect(cleanUp)

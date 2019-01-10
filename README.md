@@ -2,4 +2,4 @@
 
 
 # Screenshot
-![Ninja-Preview Screenshot](/images/logo.png)
+![Ninja-Preview Screenshot](ninja_preview.png)

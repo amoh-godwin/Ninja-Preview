@@ -2,4 +2,4 @@
 
 
 # Screenshot
-![Ninja-Preview Screenshot](ninja_preview.png)
+![Screenshot of Ninja-Preview](ninja_preview.PNG)

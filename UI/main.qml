@@ -34,6 +34,7 @@ ApplicationWindow {
             var name = url.substring(8, url.length)
             view.model.append({"url": url, "name": name})
             len--
+            view.currentIndex = view.count - 1
         }
 
     }
@@ -211,15 +212,14 @@ ApplicationWindow {
 
                         ListView {
                             id: infoView
-                            width: parent.width
-                            height: parent.height
-                            spacing: 8
+                            anchors.fill: parent
+                            spacing: 12
                             model: InfoModel {}
                             delegate: InfoDelegate {}
                             focus: true
                             clip: true
 
-                            ScrollBar.vertical: ScrollBar {id: infoPaneSb}
+                            ScrollBar.vertical: ScrollBar {}
                             ScrollBar.horizontal: ScrollBar {}
 
                         }
@@ -268,7 +268,7 @@ ApplicationWindow {
 
             console.log(rel_ind)
             infoView.model.setProperty(rel_ind, 'content', content)
-            infoPaneSb.increase()
+            infoView.currentIndex = rel_ind
         }
 
     }

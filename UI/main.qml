@@ -139,6 +139,7 @@ ApplicationWindow {
         id: picker
         selectExisting: true
         selectMultiple: true
+        folder: shortcuts.home
 
         nameFilters: ['Qml Files (*.qml)']
 

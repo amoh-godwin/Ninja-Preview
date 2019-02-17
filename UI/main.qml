@@ -219,7 +219,7 @@ ApplicationWindow {
                             focus: true
                             clip: true
 
-                            ScrollBar.vertical: ScrollBar {}
+                            ScrollBar.vertical: ScrollBar {id: infoPaneSb}
                             ScrollBar.horizontal: ScrollBar {}
 
                         }
@@ -268,6 +268,7 @@ ApplicationWindow {
 
             console.log(rel_ind)
             infoView.model.setProperty(rel_ind, 'content', content)
+            infoPaneSb.increase()
         }
 
     }

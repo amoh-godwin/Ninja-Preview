@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
 from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from preview import Preview
@@ -25,7 +26,7 @@ engine.rootContext().setContextProperty('preview', preview)
 engine.load('UI/main.qml')
 
 cwd = os.getcwd()
-os.chdir(os.path.join(cwd, "App/qmlview/qmlview"))
+os.chdir(os.path.join(cwd, "App/qmlview"))
 engine.quit.connect(qApp.quit)
 
 qApp.aboutToQuit.connect(cleanUp)

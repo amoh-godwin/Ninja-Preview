@@ -1,0 +1,4 @@
+minimise - E921
+maximise - E922
+restore - E923
+close - E8BB

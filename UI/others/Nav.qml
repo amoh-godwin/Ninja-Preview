@@ -24,7 +24,7 @@ ToolBar {
 
         }
 
-        NavButton {
+        /*NavButton {
             Layout.alignment: Layout.Bottom
             text: "\uE738"
 
@@ -38,7 +38,7 @@ ToolBar {
 
             onClicked: mainWindow.close()
 
-        }
+        }*/
 
     }
 

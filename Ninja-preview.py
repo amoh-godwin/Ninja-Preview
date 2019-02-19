@@ -6,7 +6,7 @@ from preview import Preview
 
 qApp = QGuiApplication(sys.argv)
 
-qApp.setWindowIcon(QIcon("/UI/icons/logo.ico"))
+qApp.setWindowIcon(QIcon("./UI/icons/logo.ico"))
 
 engine = QQmlApplicationEngine()
 

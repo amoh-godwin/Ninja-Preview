@@ -11,7 +11,7 @@ ApplicationWindow {
     width: 800
     height: 600
     visible: true
-    title: "Nothing Running"
+    title: "Empty"
     color: "transparent"
 
     flags: Qt.Window | Qt.FramelessWindowHint
@@ -34,6 +34,7 @@ ApplicationWindow {
             var name = url.substring(8, url.length)
             view.model.append({"url": url, "name": name})
             len--
+            view.currentIndex = view.count - 1
         }
 
     }
@@ -65,55 +66,97 @@ ApplicationWindow {
             color: "#191b1f"
 
             RowLayout {
-                height: parent.height
-
-                Image {
-                    Layout.leftMargin: 15
-                    Layout.alignment: Layout.Center
-                    sourceSize.width: 18
-                    sourceSize.height: 18
-                    source: "icons/ic_airplay_white_18dp.png"
-                }
-
-                Text {
-                    Layout.leftMargin: 15
-                    width: 200
-                    font {
-                        family: "Segoe UI Semilight"
-                        pixelSize: 12
-                    }
-                    elide: Text.ElideMiddle
-                    text: title + "  - "
-                    color: "white"
-                }
-
-                Text {
-                    font {
-                        family: "Segoe UI Semilight"
-                        pixelSize: 12
-                    }
-                    text: "Ninja-Preview  (64-bit)"
-                    color: "white"
-                }
-
-            }
-
-            MouseArea {
                 anchors.fill: parent
 
-                onPressed: {
-                    prevX = mouseX
-                    prevY = mouseY
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    color: "transparent"
+
+                    RowLayout {
+
+                        height: parent.height
+
+                        Image {
+                            Layout.leftMargin: 15
+                            Layout.alignment: Layout.Center
+                            sourceSize.width: 18
+                            sourceSize.height: 18
+                            source: "icons/ic_airplay_white_18dp.png"
+                        }
+
+                        Text {
+                            Layout.leftMargin: 15
+                            width: 200
+                            font {
+                                family: "Segoe UI Semilight"
+                                pixelSize: 12
+                            }
+                            elide: Text.ElideMiddle
+                            text: title + "  - "
+                            color: "white"
+                        }
+
+                        Text {
+                            font {
+                                family: "Segoe UI Semilight"
+                                pixelSize: 12
+                            }
+                            text: "Ninja-Preview (64-bit)"
+                            color: "white"
+                        }
+
+
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onPressed: {
+                            prevX = mouseX
+                            prevY = mouseY
+                        }
+
+                        onMouseXChanged: {
+                            var dx = mouseX - prevX
+                            mainWindow.setX(mainWindow.x + dx)
+                        }
+
+                        onMouseYChanged: {
+                            var dy = mouseY - prevY
+                            mainWindow.setY(mainWindow.y + dy)
+                        }
+
+                    }
+
                 }
 
-                onMouseXChanged: {
-                    var dx = mouseX - prevX
-                    mainWindow.setX(mainWindow.x + dx)
-                }
+                Row {
+                    Layout.alignment: Qt.AlignRight
+                    Layout.fillHeight: true
 
-                onMouseYChanged: {
-                    var dy = mouseY - prevY
-                    mainWindow.setY(mainWindow.y + dy)
+                    NavButton {
+                        height: parent.height
+                        text: "\uE921"
+
+                        onClicked: mainWindow.showMinimized()
+
+                    }
+
+                    NavButton {
+                        height: parent.height
+                        text: "\uE922"
+
+                    }
+
+                    NavButton {
+                        height: parent.height
+                        text: "\uE8BB"
+
+                        onClicked: mainWindow.close()
+                    }
+
+
                 }
 
             }
@@ -211,9 +254,8 @@ ApplicationWindow {
 
                         ListView {
                             id: infoView
-                            width: parent.width
-                            height: parent.height
-                            spacing: 8
+                            anchors.fill: parent
+                            spacing: 12
                             model: InfoModel {}
                             delegate: InfoDelegate {}
                             focus: true
@@ -237,6 +279,7 @@ ApplicationWindow {
         id: picker
         selectExisting: true
         selectMultiple: true
+        folder: shortcuts.home
 
         nameFilters: ['Qml Files (*.qml)']
 
@@ -267,6 +310,7 @@ ApplicationWindow {
 
             console.log(rel_ind)
             infoView.model.setProperty(rel_ind, 'content', content)
+            infoView.currentIndex = rel_ind
         }
 
     }

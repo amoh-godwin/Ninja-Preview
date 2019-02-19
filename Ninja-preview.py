@@ -4,15 +4,9 @@ from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from preview import Preview
 
-
-def cleanUp():
-    preview.app_closed = True
-    return
-
-
 qApp = QGuiApplication(sys.argv)
 
-qApp.setWindowIcon(QIcon("./UI/icons/ic_airplay_white_18dp.png"))
+qApp.setWindowIcon(QIcon("/UI/icons/logo.ico"))
 
 engine = QQmlApplicationEngine()
 
@@ -23,7 +17,5 @@ engine.rootContext().setContextProperty('preview', preview)
 engine.load('UI/main.qml')
 
 engine.quit.connect(qApp.quit)
-
-qApp.aboutToQuit.connect(cleanUp)
 
 sys.exit(qApp.exec_())

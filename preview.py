@@ -6,8 +6,6 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
 class Preview(QObject):
     """
-        The function that really does the calling of qmlview
-        and reading its return codes
     """
 
     def __init__(self):
@@ -25,8 +23,8 @@ class Preview(QObject):
     def run(self, filename, view_index):
         # Start a thread to handle process
         run_thread = threading.Thread(target=self._run, args=[filename,
-                                                              view_index],
-                                      daemon=True)
+                                                              view_index])
+        run_thread.daemon = True
         run_thread.start()
         return
 
@@ -83,8 +81,8 @@ class Preview(QObject):
                     self.err_chk_on = True
                     err_chk_thread = threading.Thread(
                                             target=self._error_checking,
-                                            args=[obj],
-                                            daemon=True)
+                                            args=[obj])
+                    err_chk_thread.daemon = True
                     err_chk_thread.start()
                     # continue
 
@@ -94,7 +92,7 @@ class Preview(QObject):
                 elif self.output != b'\n' and self.err_chk_on:
                     self.break_check = True
 
-                # send output to UI layer
+                # Send output to UI layer
                 self.log.emit(str(view_index) + ":::" + str(self.output,
                                                             'utf-8'))
 
@@ -163,3 +161,8 @@ class Preview(QObject):
         # Reset the variables
         self.err_chk_on = False
         self.break_check = False
+
+    def end_read(self):
+        print('has called end_read')
+        sleep(0.3)
+        self.process_running = False

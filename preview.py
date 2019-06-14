@@ -1,3 +1,4 @@
+import os
 import subprocess
 import threading
 from time import sleep
@@ -27,10 +28,14 @@ class Preview(QObject):
     def _run(self, filename):
         print('right here')
         self.process_running = True
-        self.output += subprocess.check_output(['qmlview',
-                                                filename, ],
-                                               stderr=subprocess.STDOUT,
-                                               shell=True)
+        if os.name == 'nt':
+            self.output += subprocess.check_output(['qmlview',
+                                                    filename, ],
+                                                   stderr=subprocess.STDOUT,
+                                                   shell=True)
+        else:
+            cmd = './qmlview ' + filename
+            self.output = os.system(cmd)
         self.process_running = False
         print(self.output)
 

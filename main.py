@@ -14,7 +14,7 @@ def cleanUp():
 
 qApp = QGuiApplication(sys.argv)
 
-qApp.setWindowIcon(QIcon("/UI/icons/logo.ico"))
+qApp.setWindowIcon(QIcon("/UI/icons/logo.png"))
 
 engine = QQmlApplicationEngine()
 preview = Preview()

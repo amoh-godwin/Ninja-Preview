@@ -1,5 +1,5 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.3
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 ToolButton {
     id: ctrl
@@ -14,7 +14,8 @@ ToolButton {
     contentItem: Text {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.family: "Segoe MDL2 Assets"
+        font.family: "Material Design Icons"
+        font.pixelSize: 16
         text: ctrl.text
         color: "white"
     }

@@ -1,6 +1,6 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
+import QtQuick 2.12
+import QtQuick.Controls 2.5
+import QtQuick.Layouts 1.5
 import "../others"
 
 Component {
@@ -28,14 +28,14 @@ Component {
             }
 
             CustomButton {
-                text: "\uE768"
+                text: "\uF40a"
 
                 onClicked: runFile(name)
 
             }
 
             CustomButton {
-                text: "\uE738"
+                text: "\uF374"
 
                 onClicked: removeFromView(index)
 

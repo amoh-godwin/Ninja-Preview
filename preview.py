@@ -1,3 +1,4 @@
+import os
 import subprocess
 import threading
 from time import sleep
@@ -30,8 +31,10 @@ class Preview(QObject):
 
     def _run(self, filename, view_index):
         self.process_running = True
-        subP = subprocess.Popen(['qmlview',
-                                filename, ],
+
+        command = './qmlview ' + '/' + filename
+
+        subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT,
                                 shell=True)
@@ -43,8 +46,13 @@ class Preview(QObject):
     def _monitor(self, obj, view_index):
         # monitor a change in the output variable
         while (self.process_running and not self.app_closed):
+            # just added
+            # read one char from stdout
+            char = obj.stdout.read(1)
             # check if error checking is on
-            length = obj.stdout.tell()
+            if char == '':
+                length = 0
+            # length = obj.stdout.tell()
             if self.err_chk_on and length == 0:
                 if length == 0:
                     # wait seven seconds since it takes at least
@@ -54,7 +62,7 @@ class Preview(QObject):
                     continue
 
             # read one char from stdout
-            char = obj.stdout.read(1)
+            # char = obj.stdout.read(1)  ***
 
             # if the one char is a newline
             # this is normal, it supposed to be at the end
@@ -127,6 +135,7 @@ class Preview(QObject):
         self.err_chk_called = False
 
         # emit the exit codes
+        print('to emit')
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
         return
@@ -165,4 +174,6 @@ class Preview(QObject):
     def end_read(self):
         print('has called end_read')
         sleep(0.3)
+        # change directory back to avoid any crashes
+        # os.chdir(default_path)
         self.process_running = False

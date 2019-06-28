@@ -49,3 +49,5 @@ target_wrapper.*
 CMakeLists.txt.user*
 
 # This project
+build/
+*.spec

@@ -1,4 +1,4 @@
 # Ninja-Preview
 
-# Build-64
+# Build-linux
 This branch is for building purposes.

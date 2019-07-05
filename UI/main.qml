@@ -82,7 +82,7 @@ ApplicationWindow {
                             Layout.alignment: Layout.Center
                             sourceSize.width: 18
                             sourceSize.height: 18
-                            source: "icons/ic_airplay_white_18dp.png"
+                            source: "qrc:///icons/logo.png"
                         }
 
                         Text {
@@ -137,7 +137,7 @@ ApplicationWindow {
 
                     NavButton {
                         height: parent.height
-                        text: "\uE921"
+                        text: "\uf5b0"
 
                         onClicked: mainWindow.showMinimized()
 
@@ -145,13 +145,13 @@ ApplicationWindow {
 
                     NavButton {
                         height: parent.height
-                        text: "\uE922"
+                        text: "\uF5af"
 
                     }
 
                     NavButton {
                         height: parent.height
-                        text: "\uE8BB"
+                        text: "\uF5ad"
 
                         onClicked: mainWindow.close()
                     }

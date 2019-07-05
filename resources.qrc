@@ -1,0 +1,16 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource>
+    <file>UI/Components/InfoDelegate.qml</file>
+    <file>UI/Components/InfoModel.qml</file>
+    <file>UI/Components/QmlFilesDelegate.qml</file>
+    <file>UI/Components/QmlFilesModel.qml</file>
+    <file>UI/fonts/materialdesignicons/materialdesignicons-webfont.ttf</file>
+    <file alias="icons/logo.png">UI/icons/logo.png</file>
+    <file>UI/icons/logo.ico</file>
+    <file>UI/others/CustomButton.qml</file>
+    <file>UI/others/Nav.qml</file>
+    <file>UI/others/NavButton.qml</file>
+    <file>UI/main.qml</file>
+</qresource>
+</RCC>

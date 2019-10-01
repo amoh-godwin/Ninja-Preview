@@ -1,0 +1,2 @@
+- should be able to preview files that are not in a proper ```ApplicationWindow```
+- add all Qml modules that are on the qml import path but can not be found in the Ninja-preview's subpath to the ninja-preview's subpath before every run

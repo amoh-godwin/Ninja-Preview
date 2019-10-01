@@ -7,3 +7,6 @@ Please be sure to run the python inside the repository folder
 This way the current working directory remains the repository folder,
 which is necessary for the effecient running of the app, since all paths are
 relative to the ```main.py```
+
+# Screenshot
+![Screenshot of Ninja-Preview](ninja_preview.PNG)

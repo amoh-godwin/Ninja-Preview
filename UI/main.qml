@@ -16,6 +16,8 @@ ApplicationWindow {
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
+    FontLoader { id: mainFont; source: "fonts/materialdesignicons/materialdesignicons-webfont.ttf"}
+
     property int prevX
     property int prevY
     property int current_index

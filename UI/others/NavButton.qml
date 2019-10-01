@@ -14,7 +14,7 @@ ToolButton {
     contentItem: Text {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.family: "Material Design Icons"
+        font.family: mainFont.name
         font.pixelSize: 16
         text: ctrl.text
         color: "white"

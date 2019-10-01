@@ -12,6 +12,9 @@
 #PyCache
 /__pycache__
 
+#dist path
+/dist
+
 # Qt-es
 object_script.*.Release
 object_script.*.Debug
@@ -48,3 +51,4 @@ CMakeLists.txt.user*
 # This project
 /dist
 /build
+*.spec

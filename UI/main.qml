@@ -1,20 +1,22 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import QtQuick.Dialogs 1.3
-import QtGraphicalEffects 1.0
+import QtGraphicalEffects 1.12
 import "others"
 import "Components"
 
 ApplicationWindow {
     id: mainWindow
-    width: 800
+    width: 972
     height: 600
     visible: true
     title: "Empty"
     color: "transparent"
 
     flags: Qt.Window | Qt.FramelessWindowHint
+
+    FontLoader { id: mainFont; source: "fonts/materialdesignicons/materialdesignicons-webfont.ttf"}
 
     property int prevX
     property int prevY
@@ -82,7 +84,7 @@ ApplicationWindow {
                             Layout.alignment: Layout.Center
                             sourceSize.width: 18
                             sourceSize.height: 18
-                            source: "icons/ic_airplay_white_18dp.png"
+                            source: "icons/logo.png"
                         }
 
                         Text {
@@ -137,7 +139,7 @@ ApplicationWindow {
 
                     NavButton {
                         height: parent.height
-                        text: "\uE921"
+                        text: "\uf5b0"
 
                         onClicked: mainWindow.showMinimized()
 
@@ -145,13 +147,13 @@ ApplicationWindow {
 
                     NavButton {
                         height: parent.height
-                        text: "\uE922"
+                        text: "\uF5af"
 
                     }
 
                     NavButton {
                         height: parent.height
-                        text: "\uE8BB"
+                        text: "\uF5ad"
 
                         onClicked: mainWindow.close()
                     }
@@ -202,7 +204,7 @@ ApplicationWindow {
             height: parent.height
             spacing: 0
 
-            Rectangle {
+            Rectangle { // Nav
                 Layout.preferredWidth: 48
                 Layout.fillHeight: true
                 color: "black"
@@ -221,22 +223,30 @@ ApplicationWindow {
                     height: parent.height
                     spacing: 0
 
-                    Rectangle {
+                    DropArea {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
 
-                        ListView {
-                            id: view
-                            width: parent.width
-                            height: parent.height
-                            model: QmlFilesModel {}
-                            delegate: QmlFilesDelegate {}
-                            focus: true
-
-                            ScrollBar.vertical: ScrollBar {}
-
+                        onDropped: {
+                            addfiles(drop.urls)
                         }
 
+                        Rectangle {
+                            anchors.fill: parent
+
+                            ListView {
+                                id: view
+                                width: parent.width
+                                height: parent.height
+                                model: QmlFilesModel {}
+                                delegate: QmlFilesDelegate {}
+                                focus: true
+
+                                ScrollBar.vertical: ScrollBar {}
+
+                            }
+
+                        }
                     }
 
                     Rectangle {

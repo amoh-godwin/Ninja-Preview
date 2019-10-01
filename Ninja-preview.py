@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
+from PyQt5.QtCore import QCoreApplication, QSettings
 from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from preview import Preview
 
-
-def cleanUp():
-    print(preview.app_closed)
-    preview.app_closed = True
-    print('\n', preview.app_closed)
-    return
-
-
 qApp = QGuiApplication(sys.argv)
 
-qApp.setWindowIcon(QIcon("/UI/icons/logo.ico"))
+QCoreApplication.setOrganizationName("Deuteronomy Works")
+QCoreApplication.setApplicationName("Ninja-Preview")
+settings = QSettings()
+
+qApp.setWindowIcon(QIcon("./UI/icons/logo.ico"))
 
 engine = QQmlApplicationEngine()
 
@@ -28,7 +25,5 @@ engine.load('UI/main.qml')
 cwd = os.getcwd()
 os.chdir(os.path.join(cwd, "App/qmlview"))
 engine.quit.connect(qApp.quit)
-
-qApp.aboutToQuit.connect(cleanUp)
 
 sys.exit(qApp.exec_())

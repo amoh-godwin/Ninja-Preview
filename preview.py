@@ -1,3 +1,4 @@
+import os
 import subprocess
 import threading
 from time import sleep
@@ -24,14 +25,16 @@ class Preview(QObject):
         # Start a thread to handle process
         run_thread = threading.Thread(target=self._run, args=[filename,
                                                               view_index])
+        run_thread.daemon = True
         run_thread.start()
         return
 
     def _run(self, filename, view_index):
-        print('right here', view_index)
         self.process_running = True
-        subP = subprocess.Popen(['qmlview',
-                                filename, ],
+
+        command = './qmlview ' + '/' + filename
+
+        subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT,
                                 shell=True)
@@ -43,8 +46,13 @@ class Preview(QObject):
     def _monitor(self, obj, view_index):
         # monitor a change in the output variable
         while (self.process_running and not self.app_closed):
+            # just added
+            # read one char from stdout
+            char = obj.stdout.read(1)
             # check if error checking is on
-            length = obj.stdout.tell()
+            if char == '':
+                length = 0
+            # length = obj.stdout.tell()
             if self.err_chk_on and length == 0:
                 if length == 0:
                     # wait seven seconds since it takes at least
@@ -54,7 +62,7 @@ class Preview(QObject):
                     continue
 
             # read one char from stdout
-            char = obj.stdout.read(1)
+            # char = obj.stdout.read(1)  ***
 
             # if the one char is a newline
             # this is normal, it supposed to be at the end
@@ -82,6 +90,7 @@ class Preview(QObject):
                     err_chk_thread = threading.Thread(
                                             target=self._error_checking,
                                             args=[obj])
+                    err_chk_thread.daemon = True
                     err_chk_thread.start()
                     # continue
 
@@ -91,7 +100,7 @@ class Preview(QObject):
                 elif self.output != b'\n' and self.err_chk_on:
                     self.break_check = True
 
-                print('output: ', str(self.output))
+                # Send output to UI layer
                 self.log.emit(str(view_index) + ":::" + str(self.output,
                                                             'utf-8'))
 
@@ -108,24 +117,28 @@ class Preview(QObject):
                 if obj.returncode is None:
                     break
                 else:
-                    print(obj.returncode)
+                    # do nothing
+                    pass
             # it is just a normal character add and lets continue
             # this is one of the two required
             else:
                 self.output += char
 
         # we are out of loop
-        print('process has exited')
-
         # calculate exit code
         if self.err_chk_called:
             exit_code = '1x0000'
         else:
             exit_code = '0'
-        print(exit_code)
+
+        # reset the variable
         self.err_chk_called = False
+
+        # emit the exit codes
+        print('to emit')
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
+        return
 
     def _error_checking(self, obj):
 
@@ -151,13 +164,16 @@ class Preview(QObject):
                 sleep(1)
 
             else:
-                print(self.output, ': not an error')
+                # not an error
                 break
 
+        # Reset the variables
         self.err_chk_on = False
         self.break_check = False
 
     def end_read(self):
         print('has called end_read')
         sleep(0.3)
+        # change directory back to avoid any crashes
+        # os.chdir(default_path)
         self.process_running = False

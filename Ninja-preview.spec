@@ -3,10 +3,10 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\Users\\GODWIN\\Documents\\GitHub\\Ninja-Preview\\Ninja-preview.py'],
-             pathex=['C:\\Users\\GODWIN\\Documents\\GitHub\\Ninja-Preview'],
+a = Analysis(['H:\\GitHub\\Ninja-Preview\\Ninja-preview.py'],
+             pathex=['H:\\GitHub\\Ninja-Preview'],
              binaries=[],
-             datas=[],
+             datas=[("H:\\GitHub\\Ninja-Preview\\resource.rcc", ".")],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -27,7 +27,7 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False,
-	  icon='C:\\Users\\GODWIN\\Documents\\GitHub\\Ninja-Preview\\UI\\icons\\logo.ico' )
+	  icon='H:\\GitHub\\Ninja-Preview-UI\\UI\\icons\\logo.ico' )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

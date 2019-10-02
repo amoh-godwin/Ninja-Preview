@@ -12,9 +12,9 @@ QCoreApplication.setOrganizationName("Deuteronomy Works")
 QCoreApplication.setApplicationName("Ninja-Preview")
 settings = QSettings()
 
-QResource.registerResource('resources.rcc')
+QResource.registerResource('resource.rcc')
 
-qApp.setWindowIcon(QIcon(":/UI/icons/logo.ico"))
+qApp.setWindowIcon(QIcon(":icons/logo.png"))
 
 engine = QQmlApplicationEngine()
 

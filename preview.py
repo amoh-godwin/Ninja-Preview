@@ -31,7 +31,7 @@ class Preview(QObject):
     def _run(self, filename, view_index):
         self.process_running = True
 
-        command = './qmlview ' + '/' + filename
+        command = 'qmlview ' + '"' + filename + '"'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,

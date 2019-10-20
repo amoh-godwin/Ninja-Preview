@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>UI/Components/InfoDelegate.qml</file>
+        <file>UI/Components/InfoDelegate.qmlc</file>
+        <file>UI/Components/InfoModel.qml</file>
+        <file>UI/Components/InfoModel.qmlc</file>
+        <file>UI/Components/QmlFilesDelegate.qml</file>
+        <file>UI/Components/QmlFilesDelegate.qmlc</file>
+        <file>UI/Components/QmlFilesModel.qml</file>
+        <file>UI/Components/QmlFilesModel.qmlc</file>
+        <file>UI/fonts/materialdesignicons/materialdesignicons-webfont.ttf</file>
+        <file alias="icons/logo.png">UI/icons/logo.png</file>
+        <file>UI/others/CustomButton.qml</file>
+        <file>UI/others/CustomButton.qmlc</file>
+        <file>UI/others/Nav.qml</file>
+        <file>UI/others/Nav.qmlc</file>
+        <file>UI/others/NavButton.qml</file>
+        <file>UI/others/NavButton.qmlc</file>
+        <file alias="UI/main.qml">UI/main.qml</file>
+        <file alias="UI/main.qmlc">UI/main.qmlc</file>
+        <file alias="qml/phone_replacement_qml.qml">UI/bg_components/phone_replacement_qml.qml</file>
+        <file alias="qml/replacement_qml.qml">UI/bg_components/replacement_qml.qml</file>
+        <file alias="images/phone-bg.png">UI/images/phone-bg.png</file>
+    </qresource>
+</RCC>

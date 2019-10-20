@@ -5,7 +5,7 @@ from PyQt5.QtCore import QCoreApplication, QSettings, QResource
 from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from preview import Preview
-QResource.registerResource('./resource.rcc')
+QResource.registerResource("resource.rcc")
 qApp = QGuiApplication(sys.argv)
 
 QCoreApplication.setOrganizationName("Deuteronomy Works")

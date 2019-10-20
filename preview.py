@@ -53,7 +53,7 @@ class Preview(QObject):
 
     def _run_in_phone_frame(self, filename, view_index):
 
-        command = 'qmlview ' + '"' + filename + '"' + '--phone'
+        command = 'qmlview ' + '"' + filename + '"' + ' --phone'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,

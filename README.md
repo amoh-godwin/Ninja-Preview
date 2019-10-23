@@ -9,4 +9,4 @@ which is necessary for the effecient running of the app, since all paths are
 relative to the ```main.py```
 
 # Screenshot
-![Screenshot of Ninja-Preview](ninja_preview.PNG)
+![Screenshot of Ninja-Preview](Ninja-preview-capture.PNG)

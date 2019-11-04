@@ -28,10 +28,32 @@ class Preview(QObject):
         run_thread.start()
         return
 
+    @pyqtSlot(str, int)
+    def run_in_phone_frame(self, filename, view_index):
+
+        run_thread = threading.Thread(target=self._run_in_phone_frame,
+                                      args=[filename, view_index])
+        run_thread.daemon = True
+        run_thread.start()
+        return
+
     def _run(self, filename, view_index):
         self.process_running = True
 
         command = 'qmlview ' + '"' + filename + '"'
+
+        subP = subprocess.Popen(command,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT,
+                                shell=True)
+        monitor_thread = threading.Thread(target=self._monitor,
+                                          args=[subP, view_index],
+                                          daemon=True)
+        monitor_thread.start()
+
+    def _run_in_phone_frame(self, filename, view_index):
+
+        command = 'qmlview ' + '"' + filename + '"' + ' --phone'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,

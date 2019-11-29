@@ -156,7 +156,6 @@ class Preview(QObject):
         self.err_chk_called = False
 
         # emit the exit codes
-        print('to emit')
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
         return
@@ -193,7 +192,6 @@ class Preview(QObject):
         self.break_check = False
 
     def end_read(self):
-        print('has called end_read')
         sleep(0.3)
         # change directory back to avoid any crashes
         # os.chdir(default_path)

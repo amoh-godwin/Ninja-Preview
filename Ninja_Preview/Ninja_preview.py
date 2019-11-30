@@ -7,33 +7,37 @@ from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from Ninja_Preview.preview import Preview
 from Ninja_Preview._ninjapreview_resource import rcc
-
+print('how')
 def dummy_run():
     pass
 
+print('hdfdsf')
 dec = b64decode(rcc)
 
-with open('_ninjapreview_resource.rcc', 'wb') as rcc_f:
-    rcc_f.write(dec)
+#with open('_ninjapreview_resource.rcc', 'wb') as rcc_f:
+#    rcc_f.write(dec)
 
-QResource.registerResource("_ninjapreview_resource.rcc")
+#QResource.registerResource("_ninjapreview_resource.rcc")
 
 qApp = QGuiApplication(sys.argv)
 
-QCoreApplication.setOrganizationName("Deuteronomy Works")
-QCoreApplication.setApplicationName("Ninja-Preview")
-settings = QSettings()
+#QCoreApplication.setOrganizationName("Deuteronomy Works")
+#QCoreApplication.setApplicationName("Ninja-Preview")
+#settings = QSettings()
 
-qApp.setWindowIcon(QIcon(":icons/logo.png"))
+#qApp.setWindowIcon(QIcon(":icons/logo.png"))
 
 engine = QQmlApplicationEngine()
 
-preview = Preview()
+#preview = Preview()
 
-engine.rootContext().setContextProperty('preview', preview)
+#engine.rootContext().setContextProperty('preview', preview)
 
 engine.load("qrc:///UI/main.qml")
 
 engine.quit.connect(qApp.quit)
 
-sys.exit(qApp.exec_())
+print('her')
+qApp.exec_()
+print('him')
+sys.exit()

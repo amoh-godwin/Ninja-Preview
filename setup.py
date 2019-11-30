@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name="Ninja_Preview",
-    version="0.3beta",
+    version="1.0",
     packages=find_packages(),
     install_requires=['PyQt5 >= 5.10', 'Qmlview'],
     entry_points={
@@ -10,18 +10,18 @@ setup(
     
     author="Amoh - Gyebi Godwin Ampofo Michael",
     author_email="amohgyebigodwin@gmail.com",
-    description="An alternative to qmlscene",
+    description="A preview your Qml files",
     keywords="qmlview, qmlscene, qml, pyqt, pyqt5, pyside, pyside2",
-    url="http://example.com/HelloWorld/",   # project home page, if any
+    url="https://github.com/amoh-godwin/Ninja-Preview/",   # project home page, if any
     project_urls={
-        "Bug Tracker": "https://bugs.example.com/HelloWorld/",
-        "Documentation": "https://docs.example.com/HelloWorld/",
-        "Source Code": "https://code.example.com/HelloWorld/",
+        "Bug Tracker": "https://github.com/amoh-godwin/Ninja-Preview/issues/",
+        "Documentation": "https://github.com/amoh-godwin/Ninja-Preview/wiki/",
+        "Source Code": "https://github.com/amoh-godwin/Ninja-Preview/",
     },
     classifiers = [
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Other Environment",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
@@ -29,9 +29,9 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
     long_description = """\
-    Qmlview is a command line utility. But sort of to replace the non-existent
-    qmlscene, which was used to preview qml source code before it is loaded
-    by any C++, Java, or python code.
+    Ninja_Preview is a Graphical User Interface that aims at letting you 
+    use qmlview, which is just like qmlscene in a more flexible way, since 
+    both do not provide with Graphical User Interfaces.
     """
     
 )

@@ -8,6 +8,7 @@ according to your system.
 - develop-win: for win systems
 - setuptools: for pypi.org
 
+
 ## Dependencies
 
 ### PyQt5
@@ -15,12 +16,9 @@ according to your system.
 
 ### Qmlview
 Please use a Qmlview release for mac or one that you have built yourself.
-Doing pip install Qmlview will download Qmlview alright, but developing without it is recommemded.
-
-#### Ninja-Preview Repository
-Now you will need the Ninja-Preview itself.
-Please use either the development, develop-linux, delevep-win, setuptools branch
-according to your system.
+Doing pip install Qmlview will download Qmlview alright, but can cause conflict with path system.
+In a develop-... branch:
+you can have it in the App folder, see the README.md in that folder for more, nonetheless, developing without it, is recommemded.
 
 
 ## Test Build

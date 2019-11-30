@@ -19,7 +19,7 @@ Doing pip install Qmlview will download Qmlview alright, but developing without 
 
 #### Ninja-Preview Repository
 Now you will need the Ninja-Preview itself.
-You will then make your changes to either the development, develop-linux, build-32, delevep-win, setuptools branch
+Please use either the development, develop-linux, delevep-win, setuptools branch
 according to your system.
 
 

@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import platform
 from time import sleep
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
@@ -16,6 +17,11 @@ class Preview(QObject):
         self.break_check = False
         self.err_chk_called = False
         self.output = b''
+        # user local qmlview
+        if platform.system() == 'Windows':
+            self.qmlview = '"./qmlview"'
+        else:
+            self.qmlview = './qmlview'
 
     log = pyqtSignal(str, arguments=['_monitor'])
 
@@ -40,7 +46,7 @@ class Preview(QObject):
     def _run(self, filename, view_index):
         self.process_running = True
 
-        command = 'qmlview ' + '"' + filename + '"'
+        command = self.qmlview + ' ' + '"' + filename + '"'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
@@ -53,7 +59,7 @@ class Preview(QObject):
 
     def _run_in_phone_frame(self, filename, view_index):
 
-        command = 'qmlview ' + '"' + filename + '"' + ' --phone'
+        command = self.qmlview + ' ' + '"' + filename + '"' + ' --phone'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,

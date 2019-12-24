@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name="Ninja_Preview",
-    version="1.0",
+    version="1.1",
     packages=find_packages(),
     install_requires=['PyQt5 >= 5.10', 'Qmlview'],
     entry_points={

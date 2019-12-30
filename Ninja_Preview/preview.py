@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import platform
 from time import sleep
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
@@ -16,6 +17,11 @@ class Preview(QObject):
         self.break_check = False
         self.err_chk_called = False
         self.output = b''
+        # user local qmlview
+        if platform.system() == 'Windows':
+            self.qmlview = 'qmlview'
+        else:
+            self.qmlview = './qmlview'
 
     log = pyqtSignal(str, arguments=['_monitor'])
 
@@ -28,10 +34,32 @@ class Preview(QObject):
         run_thread.start()
         return
 
+    @pyqtSlot(str, int)
+    def run_in_phone_frame(self, filename, view_index):
+
+        run_thread = threading.Thread(target=self._run_in_phone_frame,
+                                      args=[filename, view_index])
+        run_thread.daemon = True
+        run_thread.start()
+        return
+
     def _run(self, filename, view_index):
         self.process_running = True
 
-        command = './qmlview ' + '/' + filename
+        command = self.qmlview + ' ' + '"' + filename + '"'
+
+        subP = subprocess.Popen(command,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT,
+                                shell=True)
+        monitor_thread = threading.Thread(target=self._monitor,
+                                          args=[subP, view_index],
+                                          daemon=True)
+        monitor_thread.start()
+
+    def _run_in_phone_frame(self, filename, view_index):
+
+        command = self.qmlview + ' ' + '"' + filename + '"' + ' --phone'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
@@ -134,7 +162,6 @@ class Preview(QObject):
         self.err_chk_called = False
 
         # emit the exit codes
-        print('to emit')
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
         return
@@ -171,7 +198,6 @@ class Preview(QObject):
         self.break_check = False
 
     def end_read(self):
-        print('has called end_read')
         sleep(0.3)
         # change directory back to avoid any crashes
         # os.chdir(default_path)

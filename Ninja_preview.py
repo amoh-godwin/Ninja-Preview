@@ -5,11 +5,8 @@ from base64 import b64decode
 from PyQt5.QtCore import QCoreApplication, QSettings, QResource
 from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
-from Ninja_Preview.preview import Preview
-from Ninja_Preview._ninjapreview_resource import rcc
-
-def dummy_run():
-    pass
+from preview import Preview
+from _ninjapreview_resource import rcc
 
 
 dec = b64decode(rcc)

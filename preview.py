@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import platform
 from time import sleep
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
@@ -16,8 +17,19 @@ class Preview(QObject):
         self.break_check = False
         self.err_chk_called = False
         self.output = b''
+        # user local qmlview
+        if platform.system() == 'Windows':
+            self.qmlview = 'qmlview'
+        else:
+            self.qmlview = './qmlview'
 
     log = pyqtSignal(str, arguments=['_monitor'])
+    bootedUp = pyqtSignal(str, arguments=['bootValue'])
+
+    @pyqtSlot(str)
+    def bootUp(self, status):
+        if status == 'Loaded':
+            self.find_qt_version()
 
     @pyqtSlot(str, int)
     def run(self, filename, view_index):
@@ -40,7 +52,7 @@ class Preview(QObject):
     def _run(self, filename, view_index):
         self.process_running = True
 
-        command = 'qmlview ' + '"' + filename + '"'
+        command = self.qmlview + ' ' + '"' + filename + '"'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
@@ -53,7 +65,7 @@ class Preview(QObject):
 
     def _run_in_phone_frame(self, filename, view_index):
 
-        command = 'qmlview ' + '"' + filename + '"' + ' --phone'
+        command = self.qmlview + ' ' + '"' + filename + '"' + ' --phone'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
@@ -63,6 +75,32 @@ class Preview(QObject):
                                           args=[subP, view_index],
                                           daemon=True)
         monitor_thread.start()
+
+    def find_qt_version(self):
+        find_thread = threading.Thread(target=self._find_qt_version,
+                                       args=[],
+                                       daemon=True)
+        find_thread.start()
+
+    def _find_qt_version(self):
+        qt_version = ''
+        
+        command = self.qmlview + ' ' + '-v'
+        
+        subP = subprocess.Popen(command,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT,
+                                shell=True)
+
+        ret = subP.stdout.read()
+        subP.kill()
+
+        qt_version = str(ret[:-2], 'utf-8')
+        
+        self.bootValue(qt_version)
+
+    def bootValue(self, value):
+        self.bootedUp.emit(value)
 
     def _monitor(self, obj, view_index):
         # monitor a change in the output variable
@@ -156,7 +194,6 @@ class Preview(QObject):
         self.err_chk_called = False
 
         # emit the exit codes
-        print('to emit')
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
         return
@@ -193,7 +230,6 @@ class Preview(QObject):
         self.break_check = False
 
     def end_read(self):
-        print('has called end_read')
         sleep(0.3)
         # change directory back to avoid any crashes
         # os.chdir(default_path)

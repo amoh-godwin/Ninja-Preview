@@ -21,7 +21,7 @@ class Preview(QObject):
         self.output = b''
         # user local qmlview
         if platform.system() == 'Windows':
-            cwd = os.path.dirname(sys.argv[0]
+            cwd = os.path.dirname(sys.argv[0])
             self.qmlview = os.path.join(cwd, 'qmlview.exe')
         else:
             self.qmlview = './qmlview'

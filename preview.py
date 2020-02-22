@@ -99,7 +99,10 @@ class Preview(QObject):
         subP.kill()
 
         qt_version = str(ret[:-2], 'utf-8')
-        
+        if '14' in qt_version:
+            pass
+        else:
+            qt_version = ''
         self.bootValue(qt_version)
 
     def bootValue(self, value):

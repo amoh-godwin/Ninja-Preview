@@ -1,18 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-from base64 import b64decode
 from PyQt5.QtCore import QCoreApplication, QSettings, QResource
 from PyQt5.QtGui import QGuiApplication, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from preview import Preview
-from _ninjapreview_resource import rcc
-
-
-dec = b64decode(rcc)
-
-with open('_ninjapreview_resource.rcc', 'wb') as rcc_f:
-    rcc_f.write(dec)
 
 QResource.registerResource("_ninjapreview_resource.rcc")
 

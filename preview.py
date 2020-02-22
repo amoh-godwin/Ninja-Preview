@@ -1,3 +1,5 @@
+import sys
+import os
 import subprocess
 import threading
 import platform
@@ -19,7 +21,8 @@ class Preview(QObject):
         self.output = b''
         # user local qmlview
         if platform.system() == 'Windows':
-            self.qmlview = 'qmlview'
+            cwd = os.path.dirname(sys.argv[0]
+            self.qmlview = os.path.join(cwd, 'qmlview.exe')
         else:
             self.qmlview = './qmlview'
 

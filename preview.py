@@ -99,7 +99,7 @@ class Preview(QObject):
         subP.kill()
 
         qt_version = str(ret[:-2], 'utf-8')
-        if '14' in qt_version:
+        if '5' in qt_version:
             pass
         else:
             qt_version = ''

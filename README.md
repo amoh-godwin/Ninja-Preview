@@ -5,4 +5,4 @@ Ninja-Preview or Ninja_Preview is a Graphical User Interface that aims at lettin
 both do not provide with Graphical User Interfaces.
 
 # Screenshot
-![Screenshot of Ninja-Preview](Ninja-preview-capture.PNG)
+![Screenshot of Ninja-Preview](screenshot.jpg)

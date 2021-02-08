@@ -18,6 +18,7 @@ folder_name = os.path.realpath('./dist/Ninja-Preview/')
 
 # Build archives
 if os_name == 'windows-latest':
+    # instead of a zip make Inno setup file
     # zip file
     old_file = shutil.make_archive('Ninja_Preview', 'zip', folder_name)
     filename = f'qmlview_{version}_{osn}.zip'

@@ -26,14 +26,13 @@ class Preview(QObject):
         # user local qmlview
         if platform.system() == 'Windows':
             cwd = os.path.dirname(sys.argv[0])
-            cwd = "H:\\GitHub\\Qmlview\\dist\\qmlview"
             self.qmlview = '"' + os.path.join(cwd, 'qmlview.exe') + '"'
         else:
             self.qmlview = './qmlview'
 
     log = pyqtSignal(str, arguments=['_monitor'])
     bootedUp = pyqtSignal(str, arguments=['bootValue'])
-    hotReloadExit = pyqtSignal(int, arguments=[''])
+    hotReloadExit = pyqtSignal(int, arguments=['_monitor'])
 
     @pyqtSlot(str)
     def bootUp(self, status):
@@ -49,8 +48,8 @@ class Preview(QObject):
         run_thread.start()
         return
 
-    @pyqtSlot(str, int)
-    def run_in_hot_reload_mode(self, filename, view_index, index=0):
+    @pyqtSlot(str, int, int)
+    def run_in_hot_reload_mode(self, filename, view_index, index):
         run_thread = threading.Thread(target=self._run_in_hot_reload_mode,
                                       args=[filename, view_index, index])
         run_thread.daemon = True
@@ -80,9 +79,7 @@ class Preview(QObject):
                                           daemon=True)
         monitor_thread.start()
 
-    def _run_in_hot_reload_mode(self, filename, view_index, index=0):
-
-        print(view_index, index)
+    def _run_in_hot_reload_mode(self, filename, view_index, index):
 
         # Add to hot reload indeces
         if view_index not in self.hot_reload_cores:
@@ -238,6 +235,7 @@ class Preview(QObject):
         stmt1 = str(view_index) + ":::" + 'exit code: ' + exit_code
         self.log.emit(stmt)
         self.log.emit(stmt1)
+
         if view_index in self.hot_reload_cores:
             ind = self.hot_reload_cores[view_index]
             self.hotReloadExit.emit(ind)

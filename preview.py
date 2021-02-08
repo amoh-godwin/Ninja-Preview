@@ -21,7 +21,7 @@ class Preview(QObject):
         self.output = b''
 
         # hot reload
-        self.hot_reload_indeces = []
+        self.hot_reload_cores = {}
 
         # user local qmlview
         if platform.system() == 'Windows':
@@ -85,8 +85,8 @@ class Preview(QObject):
         print(view_index, index)
 
         # Add to hot reload indeces
-        if view_index not in self.hot_reload_indeces:
-            self.hot_reload_indeces.append(index)
+        if view_index not in self.hot_reload_cores:
+            self.hot_reload_cores[view_index] = index
 
         # Now call to run
         command = self.qmlview + ' ' + '"' + filename + '"' + ' --live'
@@ -234,11 +234,14 @@ class Preview(QObject):
         self.err_chk_called = False
 
         # emit the exit codes
-        self.log.emit(str(view_index) + ":::" + "process has exited")
-        self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
-        if view_index in self.hot_reload_indeces:
-            self.hotReloadExit.emit(view_index)
-            self.hot_reload_indeces.remove(view_index)
+        stmt = str(view_index) + ":::" + "process has exited"
+        stmt1 = str(view_index) + ":::" + 'exit code: ' + exit_code
+        self.log.emit(stmt)
+        self.log.emit(stmt1)
+        if view_index in self.hot_reload_cores:
+            ind = self.hot_reload_cores[view_index]
+            self.hotReloadExit.emit(ind)
+            del self.hot_reload_cores[view_index]
         return
 
     def _error_checking(self, obj):

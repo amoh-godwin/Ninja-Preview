@@ -19,6 +19,10 @@ class Preview(QObject):
         self.break_check = False
         self.err_chk_called = False
         self.output = b''
+
+        # hot reload
+        self.hot_reload_indeces = []
+
         # user local qmlview
         if platform.system() == 'Windows':
             cwd = os.path.dirname(sys.argv[0])
@@ -28,6 +32,7 @@ class Preview(QObject):
 
     log = pyqtSignal(str, arguments=['_monitor'])
     bootedUp = pyqtSignal(str, arguments=['bootValue'])
+    hotReloadExit = pyqtSignal(int, arguments=[''])
 
     @pyqtSlot(str)
     def bootUp(self, status):
@@ -39,6 +44,14 @@ class Preview(QObject):
         # Start a thread to handle process
         run_thread = threading.Thread(target=self._run, args=[filename,
                                                               view_index])
+        run_thread.daemon = True
+        run_thread.start()
+        return
+
+    @pyqtSlot(str, int)
+    def run_in_hot_reload_mode(self, filename, view_index, index=0):
+        run_thread = threading.Thread(target=self._run_in_hot_reload_mode,
+                                      args=[filename, view_index, index])
         run_thread.daemon = True
         run_thread.start()
         return
@@ -56,6 +69,26 @@ class Preview(QObject):
         self.process_running = True
 
         command = self.qmlview + ' ' + '"' + filename + '"'
+
+        subP = subprocess.Popen(command,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT,
+                                shell=True)
+        monitor_thread = threading.Thread(target=self._monitor,
+                                          args=[subP, view_index],
+                                          daemon=True)
+        monitor_thread.start()
+
+    def _run_in_hot_reload_mode(self, filename, view_index, index=0):
+
+        print(view_index, index)
+
+        # Add to hot reload indeces
+        if view_index not in self.hot_reload_indeces:
+            self.hot_reload_indeces.append(index)
+
+        # Now call to run
+        command = self.qmlview + ' ' + '"' + filename + '"' + ' --live'
 
         subP = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
@@ -202,6 +235,9 @@ class Preview(QObject):
         # emit the exit codes
         self.log.emit(str(view_index) + ":::" + "process has exited")
         self.log.emit(str(view_index) + ":::" + 'exit code: ' + exit_code)
+        if view_index in self.hot_reload_indeces:
+            self.hotReloadExit.emit(view_index)
+            self.hot_reload_indeces.remove(view_index)
         return
 
     def _error_checking(self, obj):

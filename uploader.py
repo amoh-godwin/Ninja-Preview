@@ -66,14 +66,23 @@ if os_name == 'windows-latest':
     os.chdir('inno')
     inno_cmd = f'iscc {inno_script}'
     os.system(inno_cmd)
-    print(os.listdir(folder_name))
+    print(os.listdir(dist_folder))
     print('Inno script done changing back to directory')
     # change directory back
     os.chdir('..')
-    # zip file
-    old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version[1:]}-setup.exe")
-    filename = os.path.join(cwd, 'dist', f'Ninja_Preview_{version}_{osn}-setup.exe')
-    os.replace(old_file, filename)
+
+    # rename
+    try:
+        old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version[1:]}-setup.exe")
+        filename = os.path.join(cwd, 'dist', f'Ninja_Preview_{version}_{osn}-setup.exe')
+        os.replace(old_file, filename)
+
+    except:
+        print('failed trying something else')
+        print(os.listdir(dist_folder))
+        old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version[1:]}-setup")
+        filename = os.path.join(cwd, 'dist', f'Ninja_Preview_{version}_{osn}-setup.exe')
+        os.replace(old_file, filename)
 
 else:
     sys.exit(0)

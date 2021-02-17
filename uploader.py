@@ -3,6 +3,8 @@ import os
 import tarfile
 import shutil
 import glob
+import subprocess
+
 
 version = os.environ['GITHUB_REF'].split('/')[-1]
 print(f'version: {version}')
@@ -30,6 +32,7 @@ def change_iss():
 
         with open('ninja_preview_setup.iss', 'w') as iss_write:
             iss_write.write(conts)
+            print('\n\n', conts, '\n\n')
 
         print(os.listdir('.'))
 
@@ -64,8 +67,8 @@ if os_name == 'windows-latest':
     change_iss()
     inno_script = os.path.join(cwd, 'ninja_preview_setup.iss')
     os.chdir('inno')
-    inno_cmd = f'iscc {inno_script}'
-    os.system(inno_cmd)
+    inno_cmd = f'iscc "{inno_script}"'
+    subprocess.run(inno_cmd, capture_output=True)
     print(os.listdir(dist_folder))
     print('Inno script done changing back to directory')
     # change directory back

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ninja-Preview"
-#define MyAppVersion "1.5"
+#define MyAppVersion "{{version_number}}"
 #define MyAppPublisher "Deuteronomy Works"
 #define MyAppURL "https://www.deuteronomy-works.github.io"
 #define MyAppExeName "Ninja-Preview.exe"
@@ -21,10 +21,10 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=H:\GitHub\Ninja-Preview\LICENSE
-OutputDir=H:\GitHub\Ninja-Preview\dist
-OutputBaseFilename=Ninja-Preview-setup
-SetupIconFile=H:\GitHub\Ninja-Preview\resources\icons\logo.ico
+LicenseFile={{curr_dir}}\LICENSE
+OutputDir={{curr_dir}}\dist
+OutputBaseFilename=Ninja-Preview-{{version_number}}-setup
+SetupIconFile={{curr_dir}}\resources\icons\logo.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -61,8 +61,8 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "H:\GitHub\Ninja-Preview\dist\Ninja-Preview\Ninja-Preview.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "H:\GitHub\Ninja-Preview\dist\Ninja-Preview\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{{curr_dir}}\dist\Ninja-Preview\Ninja-Preview.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{{curr_dir}}\dist\Ninja-Preview\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

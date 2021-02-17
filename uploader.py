@@ -24,7 +24,7 @@ def change_iss():
     with open('ninja_preview.template.iss', 'r') as iss_file:
         conts = iss_file.read()
         # version number
-        conts = conts.replace('{{version_number}}', version)
+        conts = conts.replace('{{version_number}}', version[1:])
         # curr dir
         conts = conts.replace('{{curr_dir}}', cwd)
 
@@ -45,7 +45,7 @@ print('Authenticated')
 # Build archives
 if os_name == 'windows-latest':
     # Download Qmlview archive for os
-    os_cmd = 'gh release download --pattern "*.zip"'
+    os_cmd = 'gh release download --repo github.com/amoh-godwin/Qmlview --pattern "*.zip"'
     os.system(os_cmd)
     print('done wit download')
     print(os.listdir(cwd))
@@ -59,7 +59,7 @@ if os_name == 'windows-latest':
     # Extract inno setup
     shutil.unpack_archive(os.path.join(cwd, 'inno.zip'))
     print('done unpacking inno setup')
-    # Inno setup workingss
+    # Inno setup workings
     change_iss()
     inno_script = os.path.join(cwd, 'ninja_preview_setup.iss')
     os.chdir('inno')
@@ -68,13 +68,13 @@ if os_name == 'windows-latest':
     # change directory back
     os.chdir('..')
     # zip file
-    old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version}-setup.exe")
+    old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version[1:]}-setup.exe")
     filename = os.path.join(cwd, 'dist', f'Ninja_Preview_{version}_{osn}-setup.exe')
     os.rename(old_file, filename)
 
 else:
     # Download Qmlview archive for os
-    os_cmd = 'gh release download --pattern "*.tar.gz"'
+    os_cmd = 'gh release download --repo github.com/amoh-godwin/Qmlview --pattern "*.tar.gz"'
     os.system(os_cmd)
     print('done wit download')
     print(os.listdir(cwd))

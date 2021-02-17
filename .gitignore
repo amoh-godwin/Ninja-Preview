@@ -53,4 +53,3 @@ CMakeLists.txt.user*
 /build
 /App
 /Ninja_Preview.egg-info
-*.spec

@@ -76,6 +76,7 @@ if os_name == 'windows-latest':
     os.replace(old_file, filename)
 
 else:
+    sys.exit(0)
     # Download Qmlview archive for os
     os_cmd = 'gh release download --repo github.com/amoh-godwin/Qmlview --pattern "*.tar.gz"'
     os.system(os_cmd)

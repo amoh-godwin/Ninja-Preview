@@ -21,7 +21,7 @@ dist_folder = os.path.realpath('./dist/')
 
 
 def change_iss():
-    with open('ninja_preview.template.iss', 'r') as iss_file:
+    with open('ninja_preview_template.iss', 'r') as iss_file:
         conts = iss_file.read()
         # version number
         conts = conts.replace('{{version_number}}', version[1:])

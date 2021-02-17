@@ -64,6 +64,7 @@ if os_name == 'windows-latest':
     inno_script = os.path.join(cwd, 'ninja_preview_setup.iss')
     os.chdir('inno')
     inno_cmd = f'iscc {inno_script}'
+    os.system(inno_cmd)
     print('Inno script done changing back to directory')
     # change directory back
     os.chdir('..')

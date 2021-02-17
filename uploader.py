@@ -31,6 +31,7 @@ def change_iss():
         with open('ninja_preview_setup.iss', 'w') as iss_write:
             iss_write.write(conts)
 
+        print(os.listdir('.'))
 
 # Login to GH
 with open('token.txt', 'w') as tok:
@@ -65,13 +66,14 @@ if os_name == 'windows-latest':
     os.chdir('inno')
     inno_cmd = f'iscc {inno_script}'
     os.system(inno_cmd)
+    print(os.listdir(folder_name))
     print('Inno script done changing back to directory')
     # change directory back
     os.chdir('..')
     # zip file
     old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version[1:]}-setup.exe")
     filename = os.path.join(cwd, 'dist', f'Ninja_Preview_{version}_{osn}-setup.exe')
-    os.rename(old_file, filename)
+    os.replace(old_file, filename)
 
 else:
     # Download Qmlview archive for os

@@ -13,10 +13,23 @@ osn = os_name.split('-')[0]
 cwd = os.path.realpath('.')
 
 folder_name = os.path.realpath('./dist/Ninja-Preview/')
+dist_folder = os.path.realpath('./dist/')
 
 # Download Qmlview archive for os
 # extract to folder
 # copy all those contents to folder_name, skipping the existing ones
+
+
+def change_iss():
+    with open('ninja_preview.template.iss', 'r') as iss_file:
+        conts = iss_file.read()
+        # version number
+        conts = conts.replace('{{version_number}}', version)
+        # curr dir
+        conts = conts.replace('{{curr_dir}}', cwd)
+
+        with open('ninja_preview_setup.iss', 'w') as iss_write:
+            iss_write.write(conts)
 
 
 # Login to GH
@@ -43,9 +56,20 @@ if os_name == 'windows-latest':
     print('done wit unpack')
     print(os.listdir(folder_name))
     # instead of a zip make Inno setup file
+    # Extract inno setup
+    shutil.unpack_archive(os.path.join(cwd, 'inno.zip'))
+    print('done unpacking inno setup')
+    # Inno setup workingss
+    change_iss()
+    inno_script = os.path.join(cwd, 'ninja_preview_setup.iss')
+    os.chdir('inno')
+    inno_cmd = f'iscc {inno_script}'
+    print('Inno script done changing back to directory')
+    # change directory back
+    os.chdir('..')
     # zip file
-    old_file = shutil.make_archive('Ninja_Preview', 'zip', folder_name)
-    filename = f'Ninja_Preview_{version}_{osn}.zip'
+    old_file = os.path.join(cwd, 'dist', f"Ninja-Preview-{version}-setup.exe")
+    filename = os.path.join(cwd, 'dist', f'Ninja_Preview_{version}_{osn}-setup.exe')
     os.rename(old_file, filename)
 
 else:
@@ -61,9 +85,9 @@ else:
     print(os.listdir(folder_name))
     # copy all those contents to folder_name, skipping the existing ones
     # tar.gz file
-    old_file = shutil.make_archive('Ninja_Preview', 'gztar', folder_name)
-    filename = f'Ninja_Preview_{version}_{osn}.tar.gz'
-    os.rename(old_file, filename)
+    old_file = shutil.make_archive('Ninja_Preview', 'gztar', root_dir=dist_folder, base_dir=folder_name)
+    filename = os.path.join(dist_folder, f'Ninja_Preview_{version}_{osn}.tar.gz')
+    os.replace(old_file, filename)
 
 
 print(f'filename: {filename}')

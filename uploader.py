@@ -79,7 +79,7 @@ else:
     print('done wit download')
     print(os.listdir(cwd))
     # extract to folder
-    arch = glob.glob('*.tar.gz')
+    arch = glob.glob('*.tar.gz')[0]
     shutil.unpack_archive(arch, extract_dir=folder_name)
     print('done wit unpack')
     print(os.listdir(folder_name))

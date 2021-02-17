@@ -47,13 +47,13 @@ if os_name == 'windows-latest':
     # Download Qmlview archive for os
     os_cmd = 'gh release download --repo github.com/amoh-godwin/Qmlview --pattern "*.zip"'
     os.system(os_cmd)
-    print('done wit download')
+    print('done with download')
     print(os.listdir(cwd))
     # extract to folder
-    arch = glob.glob('*.zip')[0]
+    arch = glob.glob('qmlview*.zip')[0]
     shutil.unpack_archive(arch, extract_dir=folder_name)
     # copy all those contents to folder_name, skipping the existing ones
-    print('done wit unpack')
+    print('done with unpack')
     print(os.listdir(folder_name))
     # instead of a zip make Inno setup file
     # Extract inno setup
@@ -76,12 +76,12 @@ else:
     # Download Qmlview archive for os
     os_cmd = 'gh release download --repo github.com/amoh-godwin/Qmlview --pattern "*.tar.gz"'
     os.system(os_cmd)
-    print('done wit download')
+    print('done with download')
     print(os.listdir(cwd))
     # extract to folder
-    arch = glob.glob('*.tar.gz')[0]
+    arch = glob.glob('qmlview*.tar.gz')[0]
     shutil.unpack_archive(arch, extract_dir=folder_name)
-    print('done wit unpack')
+    print('done with unpack')
     print(os.listdir(folder_name))
     # copy all those contents to folder_name, skipping the existing ones
     # tar.gz file

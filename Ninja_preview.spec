@@ -1,6 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
+import os
+
 
 wd = os.path.realpath('.')
 icon_path = os.path.join(wd, 'resources', 'icons', 'logo.ico')

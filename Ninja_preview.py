@@ -2,9 +2,9 @@
 import sys
 import os
 
-from PyQt5.QtCore import QCoreApplication, QSettings, QResource
-from PyQt5.QtGui import QGuiApplication, QIcon
-from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt6.QtCore import QCoreApplication, QSettings, QResource
+from PyQt6.QtGui import QGuiApplication, QIcon
+from PyQt6.QtQml import QQmlApplicationEngine
 
 from preview import Preview
 
@@ -27,4 +27,4 @@ engine.load("qrc:///UI/main.qml")
 engine.rootObjects()[0].setProperty('preview', preview)
 engine.quit.connect(qApp.quit)
 
-sys.exit(qApp.exec_())
+sys.exit(qApp.exec())

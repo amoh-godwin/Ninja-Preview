@@ -2,7 +2,7 @@
 import sys
 import os
 
-from PyQt6.QtCore import QCoreApplication, QSettings, QResource
+from PyQt6.QtCore import QCoreApplication, QSettings
 from PyQt6.QtGui import QGuiApplication, QIcon
 from PyQt6.QtQml import QQmlApplicationEngine
 from PyQt6.QtQuick import QQuickWindow
@@ -10,7 +10,6 @@ from PyQt6.QtQuick import QQuickWindow
 from preview import Preview
 
 
-QResource.registerResource("_ninjapreview_resource.rcc")
 QQuickWindow.setSceneGraphBackend('software')
 
 qApp = QGuiApplication(sys.argv)

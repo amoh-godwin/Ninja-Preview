@@ -13,7 +13,7 @@ print(f'wd: {wd}, icon_path: {icon_path}')
 a = Analysis(['Ninja_preview.py'],
              pathex=[wd],
              binaries=[],
-             datas=[(os.path.join(wd, '_ninjapreview_resource.rcc'), '.')],
+             datas=[(os.path.join(wd, 'UI'), 'UI')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
